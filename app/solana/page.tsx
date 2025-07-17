@@ -17,8 +17,9 @@ export default function Sol() {
   };
 
   const copyMnemonic = () => {
+    if (!mnemonic) return;
     navigator.clipboard.writeText(mnemonic);
-    toast({ title: "Seed phrase copied" });
+    toast.success("Seed phrase copied to clipboard");
   };
 
   const addWallet = async () => {
@@ -50,38 +51,56 @@ export default function Sol() {
   const deleteWallet = (idx: number) => setWallets(wallets.filter((_, i) => i !== idx));
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center gap-8 bg-zinc-900 text-zinc-100">
-      <Card className="p-8 w-full max-w-md flex flex-col gap-4 bg-zinc-800">
-        <h2 className="text-2xl font-bold mb-2">Solana Wallet</h2>
-        <Button onClick={generateMnemonic}>Generate Seed Phrase</Button>
+    <main className="min-h-screen flex items-center justify-center bg-zinc-950 text-zinc-100 px-4 py-8">
+      <Card className="w-full max-w-2xl bg-zinc-900 p-6 sm:p-8 rounded-2xl shadow-xl space-y-6">
+        <h2 className="text-3xl font-bold text-center">Solana Wallet Generator</h2>
+
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button onClick={generateMnemonic} className="w-full sm:w-auto">Generate Seed Phrase</Button>
+          {mnemonic && (
+            <>
+              <Button variant="outline" onClick={copyMnemonic} className="w-full sm:w-auto">
+                Copy Seed Phrase
+              </Button>
+              <Button onClick={addWallet} className="w-full sm:w-auto">
+                Add Wallet
+              </Button>
+            </>
+          )}
+        </div>
+
         {mnemonic && (
-          <div className="flex flex-col gap-2">
-            <div className="bg-zinc-700 p-2 rounded">{mnemonic}</div>
-            <Button variant="outline" onClick={copyMnemonic}>
-              Copy Seed Phrase
-            </Button>
-            <Button onClick={addWallet}>Add Wallet</Button>
+          <div className="bg-zinc-800 p-4 rounded text-sm break-words font-mono border border-zinc-700">
+            {mnemonic}
           </div>
         )}
-        <div className="mt-4">
-          <h3 className="font-semibold mb-2">Wallets</h3>
-          {wallets.length === 0 && <div>No wallets yet.</div>}
-          {wallets.map((w, i) => (
-            <div key={i} className="mb-2 p-2 bg-zinc-700 rounded">
-              <div>
-                <span className="font-bold">Public:</span> {w.publicKey}
-              </div>
-              <div>
-                <span className="font-bold">Secret:</span> {w.secretKey}
-              </div>
-              <Button size="sm" variant="destructive" onClick={() => deleteWallet(i)}>
-                Delete
-              </Button>
+
+        <div className="space-y-4">
+          <h3 className="text-xl font-semibold border-b border-zinc-700 pb-2">Wallets</h3>
+          {wallets.length === 0 ? (
+            <p className="text-zinc-400 text-sm">No wallets created yet.</p>
+          ) : (
+            <div className="max-h-64 overflow-y-auto pr-1 space-y-3">
+              {wallets.map((w, i) => (
+                <div key={i} className="bg-zinc-800 rounded-lg p-4 text-sm border border-zinc-700 space-y-2">
+                  <div className="truncate">
+                    <span className="font-semibold text-zinc-300">Public:</span>{" "}
+                    <span className="text-zinc-400">{w.publicKey}</span>
+                  </div>
+                  <div className="truncate">
+                    <span className="font-semibold text-zinc-300">Secret:</span>{" "}
+                    <span className="text-red-400">{w.secretKey}</span>
+                  </div>
+                  <Button size="sm" variant="destructive" onClick={() => deleteWallet(i)}>
+                    Delete
+                  </Button>
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
       </Card>
-      <Toaster />
+      <Toaster richColors />
     </main>
   );
 }
