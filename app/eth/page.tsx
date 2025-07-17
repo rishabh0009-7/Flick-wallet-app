@@ -5,7 +5,6 @@ import { Card } from "@/components/ui/card";
 import * as bip39 from "bip39";
 import { useState } from "react";
 import { Toaster, toast } from "sonner";
-import { ethers } from "ethers";
 import { HDNodeWallet, Mnemonic } from "ethers";
 
 export default function Eth() {
@@ -14,19 +13,17 @@ export default function Eth() {
 
   const generateMnemonic = () => {
     setMnemonic(bip39.generateMnemonic());
-    toast.success("Seed phrase generated");
+    toast.success("New seed phrase generated");
   };
 
   const copyMnemonic = () => {
     if (!mnemonic) return;
     navigator.clipboard.writeText(mnemonic);
-    toast.success("Copied to clipboard");
+    toast.success("Seed phrase copied");
   };
 
   const addWallet = () => {
-    if (!mnemonic) {
-      return toast.error("Generate seed phrase first");
-    }
+    if (!mnemonic) return toast.error("Generate seed phrase first");
 
     try {
       const wallet = HDNodeWallet.fromMnemonic(Mnemonic.fromPhrase(mnemonic));
@@ -35,70 +32,87 @@ export default function Eth() {
         { address: wallet.address, privateKey: wallet.privateKey },
       ]);
       toast.success("Wallet added");
-    } catch (error) {
-      toast.error("Invalid mnemonic");
+    } catch {
+      toast.error("Invalid seed phrase");
     }
   };
 
-  const deleteWallet = (idx: number) => {
+  const clearWallets = () => setWallets([]);
+
+  const deleteWallet = (idx: number) =>
     setWallets(wallets.filter((_, i) => i !== idx));
-  };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center px-4 py-12 bg-zinc-900 text-zinc-100">
+    <main className="min-h-screen bg-black text-white px-4 py-12 flex flex-col items-center gap-12">
       <Toaster />
-      <Card className="w-full max-w-xl p-6 md:p-8 bg-zinc-800 shadow-lg rounded-2xl flex flex-col gap-6">
-        <h1 className="text-3xl font-bold text-center">Ethereum Wallet Generator</h1>
 
-        <div className="flex justify-center">
-          <Button onClick={generateMnemonic}>Generate Seed Phrase</Button>
-        </div>
+      <div className="w-full max-w-3xl bg-zinc-900 rounded-2xl p-8 shadow-xl border border-zinc-800">
+        <h1 className="text-3xl font-bold mb-6">Your Secret Phrase</h1>
 
-        {mnemonic && (
-          <div className="space-y-4">
-            <div className="bg-zinc-700 p-4 rounded-md text-sm break-all text-center">
-              {mnemonic}
+        {mnemonic ? (
+          <>
+            <div
+              onClick={copyMnemonic}
+              className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4 cursor-pointer"
+            >
+              {mnemonic.split(" ").map((word, index) => (
+                <div
+                  key={index}
+                  className="bg-zinc-800 text-white rounded-md px-4 py-2 text-center text-sm font-medium border border-zinc-700"
+                >
+                  {word}
+                </div>
+              ))}
             </div>
-
-            <div className="flex flex-col sm:flex-row justify-center gap-3">
-              <Button variant="outline" onClick={copyMnemonic}>
-                Copy Seed Phrase
-              </Button>
-              <Button onClick={addWallet}>Generate Wallet</Button>
-            </div>
+            <p className="text-sm text-zinc-400 mb-4">
+              📋 Click anywhere to copy
+            </p>
+          </>
+        ) : (
+          <div className="text-center mb-6">
+            <Button onClick={generateMnemonic}>Generate Seed Phrase</Button>
           </div>
         )}
+      </div>
 
-        {wallets.length > 0 && (
-          <div className="space-y-4">
-            <h2 className="text-xl font-semibold">Generated Wallets</h2>
-            <div className="space-y-3 max-h-[300px] overflow-y-auto pr-1">
+      {mnemonic && (
+        <div className="w-full max-w-3xl">
+          <div className="flex gap-4 justify-end mb-4">
+            <Button onClick={addWallet}>Add Wallet</Button>
+            <Button variant="destructive" onClick={clearWallets}>
+              Clear Wallets
+            </Button>
+          </div>
+
+          {wallets.length > 0 && (
+            <div className="space-y-4">
               {wallets.map((w, i) => (
                 <div
                   key={i}
-                  className="bg-zinc-700 p-3 rounded-lg text-sm space-y-1"
+                  className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 space-y-2"
                 >
-                  <div>
+                  <h2 className="font-semibold text-lg">Wallet {i + 1}</h2>
+                  <p className="text-sm text-purple-300">
                     <span className="font-medium">Address:</span> {w.address}
-                  </div>
-                  <div>
+                  </p>
+                  <p className="text-sm text-red-400">
                     <span className="font-medium">Private Key:</span>{" "}
                     {w.privateKey}
-                  </div>
+                  </p>
                   <Button
                     size="sm"
                     variant="destructive"
-                    className="mt-2"
                     onClick={() => deleteWallet(i)}
+                    className="mt-2"
                   >
-                    Delete
+                    Delete Wallet
                   </Button>
                 </div>
               ))}
             </div>
-          </div>
-        )}
-      </Card>
+          )}
+        </div>
+      )}
     </main>
   );
 }
