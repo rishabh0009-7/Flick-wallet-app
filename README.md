@@ -20,8 +20,6 @@ A modern Web3 wallet built with **Next.js**, supporting **Ethereum** and **Solan
 
 ---
 
-## 📸 Screenshots
-
 <img width="1904" height="755" alt="image" src="https://github.com/user-attachments/assets/480179f5-d7b6-43b9-90b1-5624c77308be" />
 
 
