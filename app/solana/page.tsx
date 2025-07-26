@@ -107,9 +107,8 @@ export default function Sol() {
               </div>
               
               <div className="flex justify-between items-center">
-                <p className="text-sm text-zinc-400">
-                  🔒 Click the grid above to copy your seed phrase
-                </p>
+              <p className="text-sm text-zinc-400">Click &quot;Add Wallet&quot; to create your first wallet</p>
+
                 <div className="flex gap-3">
                   <Button 
                     onClick={generateMnemonic}
