@@ -97,8 +97,9 @@ export default function Eth() {
               </div>
               
               <div className="flex justify-between items-center">
-              <p className="text-sm text-zinc-400">Click &quot;Add Wallet&quot; to create your first wallet</p>
-
+                <p className="text-sm text-zinc-400">
+                  🔒 Click the grid above to copy your seed phrase
+                </p>
                 <div className="flex gap-3">
                   <Button 
                     onClick={generateMnemonic}
@@ -144,7 +145,7 @@ export default function Eth() {
                     <span className="text-2xl">🔑</span>
                   </div>
                   <p className="text-lg">No wallets generated yet</p>
-                  <p className="text-sm">Click "Add Wallet" to create your first wallet</p>
+                  <p className="text-sm">Click &quot;Add Wallet&quot; to create your first wallet</p>
                 </div>
               </Card>
             ) : (
@@ -154,7 +155,7 @@ export default function Eth() {
                     <div className="flex justify-between items-start mb-6">
                       <div>
                         <h3 className="text-xl font-semibold text-white">Wallet {index + 1}</h3>
-                        <p className="text-sm text-zinc-400">Derivation path: m/44'/60'/0'/0/{index}</p>
+                        <p className="text-sm text-zinc-400">Derivation path: m/44&apos;/60&apos;/0&apos;/0/{index}</p>
                       </div>
                       <Button
                         onClick={() => deleteWallet(index)}

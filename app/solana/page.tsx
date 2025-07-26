@@ -107,8 +107,9 @@ export default function Sol() {
               </div>
               
               <div className="flex justify-between items-center">
-              <p className="text-sm text-zinc-400">Click &quot;Add Wallet&quot; to create your first wallet</p>
-
+                <p className="text-sm text-zinc-400">
+                  🔒 Click the grid above to copy your seed phrase
+                </p>
                 <div className="flex gap-3">
                   <Button 
                     onClick={generateMnemonic}
@@ -154,7 +155,7 @@ export default function Sol() {
                     <span className="text-2xl">🔑</span>
                   </div>
                   <p className="text-lg">No wallets generated yet</p>
-                  <p className="text-sm">Click "Add Wallet" to create your first wallet</p>
+                  <p className="text-sm">Click &quot;Add Wallet&quot; to create your first wallet</p>
                 </div>
               </Card>
             ) : (
@@ -164,7 +165,7 @@ export default function Sol() {
                     <div className="flex justify-between items-start mb-6">
                       <div>
                         <h3 className="text-xl font-semibold text-white">Wallet {index + 1}</h3>
-                        <p className="text-sm text-zinc-400">Derivation path: m/44'/501'/{index}'/0'</p>
+                        <p className="text-sm text-zinc-400">Derivation path: m/44&apos;/501&apos;/{index}&apos;/0&apos;</p>
                       </div>
                       <Button
                         onClick={() => deleteWallet(index)}
