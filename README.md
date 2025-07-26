@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🔐 Flick Wallet
 
-## Getting Started
+A modern Web3 wallet built with **Next.js**, supporting **Ethereum** and **Solana**.
 
-First, run the development server:
+ Flick Wallet lets users generate public and private key pairs directly from a **mnemonic seed phrase** 
+
+🌐 Live Demo: [https://flick-wallet-app-1.vercel.app](https://flick-wallet-app-1.vercel.app)
+
+---
+
+## ✨ Features
+
+- 🔑 Generate wallet from a 12-word mnemonic (BIP-39)
+- 🔐 Derive **public/private keypairs** for:
+  - Ethereum (via `ethers.js`)
+  - Solana (via `@solana/web3.js`)
+- ⚡ Built with **Next.js 14** and **Tailwind CSS**
+- 🔁 Multiple wallet support
+
+
+---
+
+## 📸 Screenshots
+
+<img width="1904" height="755" alt="image" src="https://github.com/user-attachments/assets/480179f5-d7b6-43b9-90b1-5624c77308be" />
+
+
+---
+
+## 🧠 Tech Stack
+
+- **Frontend:** Next.js, TypeScript, Tailwind CSS
+- **Ethereum:** `ethers.js`
+- **Solana:** `@solana/web3.js`
+- **Wallet Logic:** `bip39`, `hdkey`, `tweetnacl`, `bs58`
+
+---
+
+## 🛠️ Installation
+
+Clone the repo:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+git clone https://github.com/rishabh0009-7/Flick-wallet-app.git
+cd Flick-wallet-app
