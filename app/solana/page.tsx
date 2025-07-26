@@ -1,3 +1,4 @@
+// app/solana/page.tsx
 'use client';
 
 import { useState } from "react";
@@ -108,7 +109,7 @@ export default function Sol() {
               
               <div className="flex justify-between items-center">
                 <p className="text-sm text-zinc-400">
-                  🔒 Click the grid above to copy your seed phrase
+                  **🔒 Click the grid above to copy your seed phrase**
                 </p>
                 <div className="flex gap-3">
                   <Button 
@@ -215,7 +216,7 @@ export default function Sol() {
                           {wallet.secretKey}
                         </code>
                         <p className="text-xs text-red-500 mt-2">
-                          ⚠️ Never share your private key with anyone
+                          **⚠️ Never share your private key with anyone**
                         </p>
                       </div>
                     </div>

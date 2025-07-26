@@ -7,7 +7,8 @@ import type { ThemeProviderProps } from "next-themes"
 import * as React from "react"
 import { LuMoon, LuSun } from "react-icons/lu"
 
-export interface ColorModeProviderProps extends ThemeProviderProps {}
+// Fix for line 10:18 - changed from interface to type alias
+export type ColorModeProviderProps = ThemeProviderProps
 
 export function ColorModeProvider(props: ColorModeProviderProps) {
   return (
@@ -46,7 +47,8 @@ export function ColorModeIcon() {
   return colorMode === "dark" ? <LuMoon /> : <LuSun />
 }
 
-interface ColorModeButtonProps extends Omit<IconButtonProps, "aria-label"> {}
+// Fix for line 49:11 - changed from interface to type alias
+type ColorModeButtonProps = Omit<IconButtonProps, "aria-label">
 
 export const ColorModeButton = React.forwardRef<
   HTMLButtonElement,

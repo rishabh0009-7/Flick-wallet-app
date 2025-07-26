@@ -1,3 +1,4 @@
+// app/eth/page.tsx
 'use client';
 
 import { Button } from "@/components/ui/button";
@@ -98,7 +99,7 @@ export default function Eth() {
               
               <div className="flex justify-between items-center">
                 <p className="text-sm text-zinc-400">
-                  🔒 Click the grid above to copy your seed phrase
+                  **🔒 Click the grid above to copy your seed phrase**
                 </p>
                 <div className="flex gap-3">
                   <Button 
@@ -205,7 +206,7 @@ export default function Eth() {
                           {wallet.privateKey}
                         </code>
                         <p className="text-xs text-red-500 mt-2">
-                          ⚠️ Never share your private key with anyone
+                          **⚠️ Never share your private key with anyone**
                         </p>
                       </div>
                     </div>
